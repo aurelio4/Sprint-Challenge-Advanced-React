@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <>
-      <div className="btn-container"><button className="toggle-btn" onClick={toggleDarkMode}>Toggle Dark Mode</button></div>
+      <div className="btn-container"><button data-testid="dark-mode-btn" className="toggle-btn" onClick={toggleDarkMode}>Toggle Dark Mode</button></div>
       <PlayerCard />
     </>
   )
