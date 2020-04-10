@@ -1,36 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PlayerCard from './components/PlayerCard'
-import axios from 'axios'
 import './App.css'
+import { useDarkMode } from './hooks/useDarkMode'
 
-export default class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      loading: true,
-      playersData: []
-    }
+export default function App() {
+  const [darkMode, setDarkMode] = useDarkMode()
+
+  const toggleDarkMode = (e) => {
+    e.preventDefault();
+    setDarkMode(!darkMode)
   }
 
-  async componentDidMount() {
-    await axios.get('http://localhost:5000/api/players')
-      .then(res => this.setState({ 
-        playersData: res.data,
-        loading: false 
-      }))
-      .catch(err => console.log(err))
-  }
-
-  render() {
-    return (
-      this.state.loading
-      ? <p>Loading...</p>
-      : 
-      <>
-        <h1>App.js</h1>
-        {console.log(this.state.playersData)}
-        <PlayerCard players={this.state.playersData} />
-      </>
-    )
-  }
+  return (
+    <>
+      <div className="btn-container"><button className="toggle-btn" onClick={toggleDarkMode}>Toggle Dark Mode</button></div>
+      <PlayerCard />
+    </>
+  )
 }
